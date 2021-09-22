@@ -23,7 +23,7 @@ public class Controlador {
         return personaService.anhadirPersona(per);
     }
 
-    @GetMapping("id/{id}")
+    @GetMapping("{id}")
     public PersonaOutputDto getPersonaById(@PathVariable int id) throws Exception {
         return personaService.getPersonaById(id);
     }
@@ -39,7 +39,7 @@ public class Controlador {
     }
 
     @DeleteMapping("{id}")
-    public void deleteById(@PathVariable int id){
+    public void deleteById(@PathVariable int id) throws Exception {
         personaService.deleteById(id);
     }
 

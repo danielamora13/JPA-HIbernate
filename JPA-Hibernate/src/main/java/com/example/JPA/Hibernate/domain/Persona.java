@@ -1,5 +1,6 @@
 package com.example.JPA.Hibernate.domain;
 
+import com.example.JPA.Hibernate.infraestructure.controller.input.PersonaInputDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,5 +41,61 @@ public class Persona {
     String imagen_url;
     @Column(columnDefinition = "date")
     String termination_date;
+
+    public Persona(PersonaInputDto personaInputDto){
+        setPersona(personaInputDto);
+    }
+
+    public void setPersona(PersonaInputDto personaInputDto) {
+
+        if (personaInputDto == null) {
+            return;
+        }
+
+        if (personaInputDto.user != null) {
+            this.user = personaInputDto.user ;
+        }
+
+        if (personaInputDto.password != null) {
+            this.password = personaInputDto.password ;
+        }
+
+        if (personaInputDto.name != null) {
+            this.name = personaInputDto.name ;
+        }
+
+        if (personaInputDto.surname != null) {
+            this.surname = personaInputDto.surname ;
+        }
+
+        if (personaInputDto.company_email != null) {
+            this.company_email = personaInputDto.company_email ;
+        }
+
+        if (personaInputDto.personal_email != null) {
+            this.personal_email = personaInputDto.personal_email ;
+        }
+
+        if (personaInputDto.city != null) {
+            this.city = personaInputDto.city ;
+        }
+
+        if (personaInputDto.active != null) {
+            this.active = personaInputDto.active ;
+        }
+
+        if (personaInputDto.created_date != null) {
+            this.created_date = personaInputDto.created_date ;
+        }
+
+        if (personaInputDto.imagen_url != null) {
+            this.imagen_url = personaInputDto.imagen_url ;
+        }
+
+        if (personaInputDto.termination_date != null) {
+            this.termination_date = personaInputDto.termination_date ;
+        }
+
+    }
 
 }

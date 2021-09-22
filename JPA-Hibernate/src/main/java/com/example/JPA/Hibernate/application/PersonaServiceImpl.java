@@ -34,6 +34,9 @@ public class PersonaServiceImpl implements PersonaService {
      * @throws Exception si los email no son validos o no lo es el nombre de usuario.
      */
     public PersonaOutputDto anhadirPersona(PersonaInputDto per) throws Exception {
+        if (per == null) {
+            return null;
+        }
         if (!per.getCompany_email().contains("@")) {
             throw new Exception("El email de compañia no es valido");
         }
@@ -59,6 +62,9 @@ public class PersonaServiceImpl implements PersonaService {
      * con el id no existe.
      */
     public PersonaOutputDto updatePersonaById(PersonaInputDto per, int id) throws Exception {
+        if (per == null) {
+            return null;
+        }
         if (!per.getCompany_email().contains("@")) {
             throw new Exception("El email de compañia no es valido");
         }
@@ -69,17 +75,8 @@ public class PersonaServiceImpl implements PersonaService {
             throw new Exception("El nombre de usuario no es valido");
         }
         Persona person = personaRepository.findById(id).orElseThrow(() -> new Exception("Usuario no encontrado"));
-        person.setUser(per.getUser());
-        person.setPassword(per.getPassword());
-        person.setName(per.getName());
-        person.setSurname(per.getSurname());
-        person.setCompany_email(per.getCompany_email());
-        person.setPersonal_email(per.getPersonal_email());
-        person.setCity(per.getCity());
-        person.setActive(per.getActive());
-        person.setCreated_date(per.getCreated_date());
-        person.setImagen_url(per.getImagen_url());
-        person.setTermination_date(per.getTermination_date());
+        person.setPersona(per);
+
         personaRepository.save(person);
 
         PersonaOutputDto personaOutputDto = new PersonaOutputDto(person);
@@ -114,14 +111,17 @@ public class PersonaServiceImpl implements PersonaService {
      */
     public List<PersonaOutputDto> getPersonas() {
         List<Persona> personas = personaRepository.findAll();
-        return personas.stream().map(l -> new PersonaOutputDto(l)).collect(Collectors.toList());
+        return personas.stream().map(PersonaOutputDto::new).collect(Collectors.toList());
     }
 
     /**
      * Metodo que borra a un usuario
      * @param id id del usuario a borrar
      */
-    public void deleteById(int id) {
+    public void deleteById(int id) throws Exception {
+
+        personaRepository.findById(id).orElseThrow(() -> new Exception("Usuario no encontrado"));
+
         personaRepository.deleteById(id);
     }
 

@@ -5,18 +5,18 @@ import lombok.Data;
 
 @Data
 public class PersonaInputDto {
-    Integer id;
-    String user;
-    String password;
-    String name;
-    String surname;
-    String company_email;
-    String personal_email;
-    String city;
-    Boolean active;
-    String created_date;
-    String imagen_url;
-    String termination_date;
+    public Integer id;
+    public String user;
+    public String password;
+    public String name;
+    public String surname;
+    public String company_email;
+    public String personal_email;
+    public String city;
+    public Boolean active;
+    public String created_date;
+    public String imagen_url;
+    public String termination_date;
 
     public Persona personaInputDto(){
         Persona p= new Persona();

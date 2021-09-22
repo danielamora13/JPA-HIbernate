@@ -22,5 +22,5 @@ public interface PersonaService {
 
     List<PersonaOutputDto> getPersonas();
 
-    void deleteById(int id);
+    void deleteById(int id) throws Exception;
 }
