@@ -4,16 +4,18 @@ import com.example.JPA.Hibernate.domain.Persona;
 import com.example.JPA.Hibernate.infraestructure.controller.input.PersonaInputDto;
 import com.example.JPA.Hibernate.infraestructure.controller.output.PersonaOutputDto;
 import com.example.JPA.Hibernate.application.PersonaService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/persona")
 public class Controlador {
 
-    @Autowired
+    //@Autowired
     PersonaService personaService;
 
     @PostMapping

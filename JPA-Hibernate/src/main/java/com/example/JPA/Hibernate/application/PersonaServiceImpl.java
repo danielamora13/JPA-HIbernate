@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PersonaServiceImpl implements PersonaService {
@@ -113,13 +114,7 @@ public class PersonaServiceImpl implements PersonaService {
      */
     public List<PersonaOutputDto> getPersonas() {
         List<Persona> personas = personaRepository.findAll();
-        List<PersonaOutputDto> personasOutputDto = new ArrayList<PersonaOutputDto>();
-        PersonaOutputDto per;
-        for (Persona p: personas) {
-            per = new PersonaOutputDto(p);
-            personasOutputDto.add(per);
-        }
-        return personasOutputDto;
+        return personas.stream().map(l -> new PersonaOutputDto(l)).collect(Collectors.toList());
     }
 
     /**
