@@ -29,7 +29,7 @@ public class Controlador {
     }
 
     @GetMapping("name/{name}")
-    public PersonaOutputDto getPersonaByName(@PathVariable String name) {
+    public List<PersonaOutputDto> getPersonaByName(@PathVariable String name) {
         return personaService.getPersonaByName(name);
     }
 

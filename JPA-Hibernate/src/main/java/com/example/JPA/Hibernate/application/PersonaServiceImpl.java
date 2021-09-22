@@ -99,13 +99,13 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
     /**
-     * Metodo que encuentra a un usuario dado su nombre
-     * @param name nombre del usuario a encontrar
-     * @return el usuario buscado
-     * @throws Exception si no hay ningun usuario con ese id
+     * Metodo que encuentra a los usuarios dado su nombre
+     * @param name nombre de los usuarios a encontrar
+     * @return los usuarios buscados
      */
-    public PersonaOutputDto getPersonaByName(String name){
-        return new PersonaOutputDto(personaRepository.findByName(name));
+    public List<PersonaOutputDto> getPersonaByName(String name){
+        List<Persona> personas = personaRepository.findByName(name);
+        return personas.stream().map(l -> new PersonaOutputDto(l)).collect(Collectors.toList());
     }
 
     /**

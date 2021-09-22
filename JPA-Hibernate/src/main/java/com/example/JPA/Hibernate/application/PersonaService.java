@@ -18,7 +18,7 @@ public interface PersonaService {
 
     PersonaOutputDto getPersonaById(int id) throws Exception;
 
-    PersonaOutputDto getPersonaByName(String name);
+    List<PersonaOutputDto> getPersonaByName(String name);
 
     List<PersonaOutputDto> getPersonas();
 
