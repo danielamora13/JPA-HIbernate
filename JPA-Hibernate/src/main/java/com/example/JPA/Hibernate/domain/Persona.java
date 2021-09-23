@@ -1,20 +1,22 @@
 package com.example.JPA.Hibernate.domain;
 
 import com.example.JPA.Hibernate.infraestructure.controller.input.PersonaInputDto;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
+@ToString
 @Entity
 public class Persona {
 
@@ -22,6 +24,7 @@ public class Persona {
     @GeneratedValue
     Integer id;
     @Column(nullable = false)
+    @Size(min = 6, max = 10)
     String user;
     @Column(nullable = false)
     String password;
@@ -29,18 +32,19 @@ public class Persona {
     String name;
     String surname;
     @Column(nullable = false)
+    @Email
     String company_email;
     @Column(nullable = false)
+    @Email
     String personal_email;
     @Column(nullable = false)
     String city;
     @Column(nullable = false)
     Boolean active;
-    @Column(nullable = false, columnDefinition = "date")
-    String created_date;
+    @Column(nullable = false)
+    Date created_date = new Date();
     String imagen_url;
-    @Column(columnDefinition = "date")
-    String termination_date;
+    Date termination_date;
 
     public Persona(PersonaInputDto personaInputDto){
         setPersona(personaInputDto);

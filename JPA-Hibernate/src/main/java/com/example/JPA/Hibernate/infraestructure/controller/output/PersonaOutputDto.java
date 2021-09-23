@@ -4,6 +4,8 @@ import com.example.JPA.Hibernate.domain.Persona;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 public class PersonaOutputDto {
@@ -16,9 +18,9 @@ public class PersonaOutputDto {
     String personal_email;
     String city;
     Boolean active;
-    String created_date;
+    Date created_date;
     String imagen_url;
-    String termination_date;
+    Date termination_date;
 
     public PersonaOutputDto(Persona per) {
         if (per == null) {

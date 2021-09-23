@@ -3,6 +3,8 @@ package com.example.JPA.Hibernate.infraestructure.controller.input;
 import com.example.JPA.Hibernate.domain.Persona;
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class PersonaInputDto {
     public Integer id;
@@ -14,9 +16,9 @@ public class PersonaInputDto {
     public String personal_email;
     public String city;
     public Boolean active;
-    public String created_date;
+    public Date created_date;
     public String imagen_url;
-    public String termination_date;
+    public Date termination_date;
 
     public Persona personaInputDto(){
         Persona p= new Persona();

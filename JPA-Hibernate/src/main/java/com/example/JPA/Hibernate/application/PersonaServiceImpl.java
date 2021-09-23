@@ -1,6 +1,8 @@
 package com.example.JPA.Hibernate.application;
 
 import com.example.JPA.Hibernate.domain.Persona;
+import com.example.JPA.Hibernate.exceptions.NotFoundException;
+import com.example.JPA.Hibernate.exceptions.UnprocesableException;
 import com.example.JPA.Hibernate.infraestructure.controller.input.PersonaInputDto;
 import com.example.JPA.Hibernate.infraestructure.controller.output.PersonaOutputDto;
 import com.example.JPA.Hibernate.infraestructure.repository.PersonaRepository;
@@ -33,19 +35,19 @@ public class PersonaServiceImpl implements PersonaService {
      * @return el usuarioi que se ha anhadido.
      * @throws Exception si los email no son validos o no lo es el nombre de usuario.
      */
-    public PersonaOutputDto anhadirPersona(PersonaInputDto per) throws Exception {
+    public PersonaOutputDto anhadirPersona(PersonaInputDto per) throws UnprocesableException {
         if (per == null) {
             return null;
         }
         if (!per.getCompany_email().contains("@")) {
-            throw new Exception("El email de compañia no es valido");
+            throw new UnprocesableException("El email de compañia no es valido");
         }
         if (!per.getPersonal_email().contains("@")) {
-            throw new Exception("El email personal no es valido");
+            throw new UnprocesableException("El email personal no es valido");
         }
 
         if (per.getUser().length() < 6 || per.getUser().length() > 10) {
-            throw new Exception("El nombre de usuario no es valido");
+            throw new UnprocesableException("El nombre de usuario no es valido");
         }
         Persona p = per.personaInputDto();
         personaRepository.save(p);
@@ -61,20 +63,21 @@ public class PersonaServiceImpl implements PersonaService {
      * @throws Exception si los email no son validos o no lo es el nombre de usuario o el usuario
      * con el id no existe.
      */
-    public PersonaOutputDto updatePersonaById(PersonaInputDto per, int id) throws Exception {
+    public PersonaOutputDto updatePersonaById(PersonaInputDto per, int id) throws NotFoundException, UnprocesableException {
         if (per == null) {
             return null;
         }
         if (!per.getCompany_email().contains("@")) {
-            throw new Exception("El email de compañia no es valido");
+            throw new UnprocesableException("El email de compañia no es valido");
         }
         if (!per.getPersonal_email().contains("@")) {
-            throw new Exception("El email personal no es valido");
+            throw new UnprocesableException("El email personal no es valido");
         }
         if (per.getUser().length() < 6 || per.getUser().length() > 10) {
-            throw new Exception("El nombre de usuario no es valido");
+            throw new UnprocesableException("El nombre de usuario no es valido");
         }
-        Persona person = personaRepository.findById(id).orElseThrow(() -> new Exception("Usuario no encontrado"));
+        Persona person = personaRepository.findById(id).orElseThrow(() ->
+                new NotFoundException("Usuario con id "+id+" no encontrado"));
         person.setPersona(per);
 
         personaRepository.save(person);
@@ -91,8 +94,9 @@ public class PersonaServiceImpl implements PersonaService {
      * @return el usuario buscado
      * @throws Exception si no hay ningun usuario con ese id
      */
-    public PersonaOutputDto getPersonaById(int id) throws Exception {
-        return new PersonaOutputDto(personaRepository.findById(id).orElseThrow(() -> new Exception("No encontrado")));
+    public PersonaOutputDto getPersonaById(int id) throws NotFoundException {
+        return new PersonaOutputDto(personaRepository.findById(id).orElseThrow(() ->
+                new NotFoundException("Usuario con id "+id+" no encontrado")));
     }
 
     /**
@@ -106,7 +110,7 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
     /**
-     * Metodo que devuelve la listsa de usuarios de la tabla persona
+     * Metodo que devuelve la lista de usuarios de la tabla persona
      * @return lista de usuarios de la tabla persona
      */
     public List<PersonaOutputDto> getPersonas() {
@@ -118,9 +122,10 @@ public class PersonaServiceImpl implements PersonaService {
      * Metodo que borra a un usuario
      * @param id id del usuario a borrar
      */
-    public void deleteById(int id) throws Exception {
+    public void deleteById(int id) throws NotFoundException {
 
-        personaRepository.findById(id).orElseThrow(() -> new Exception("Usuario no encontrado"));
+        personaRepository.findById(id).orElseThrow(() ->
+                new NotFoundException("Usuario con id "+id+" no encontrado"));
 
         personaRepository.deleteById(id);
     }
