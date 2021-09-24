@@ -3,10 +3,7 @@ package com.example.JPA.Hibernate.domain;
 import com.example.JPA.Hibernate.infraestructure.controller.input.PersonaInputDto;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -22,29 +19,36 @@ public class Persona {
 
     @Id
     @GeneratedValue
-    Integer id;
+    private int id;
     @Column(nullable = false)
     @Size(min = 6, max = 10)
-    String user;
+    private String user;
     @Column(nullable = false)
-    String password;
+    private String password;
     @Column(nullable = false)
-    String name;
-    String surname;
-    @Column(nullable = false)
-    @Email
-    String company_email;
+    private String name;
+    private String surname;
     @Column(nullable = false)
     @Email
-    String personal_email;
+    private String company_email;
     @Column(nullable = false)
-    String city;
+    @Email
+    private String personal_email;
     @Column(nullable = false)
-    Boolean active;
+    private String city;
     @Column(nullable = false)
-    Date created_date = new Date();
-    String imagen_url;
-    Date termination_date;
+    private Boolean active;
+    @Column(nullable = false)
+    private Date created_date = new Date();
+    private String imagen_url;
+    private  Date termination_date;
+
+    @OneToOne(mappedBy = "persona",
+              cascade = CascadeType.ALL,
+              orphanRemoval = true,
+              fetch = FetchType.LAZY
+    )
+    private Student student;
 
     public Persona(PersonaInputDto personaInputDto){
         setPersona(personaInputDto);

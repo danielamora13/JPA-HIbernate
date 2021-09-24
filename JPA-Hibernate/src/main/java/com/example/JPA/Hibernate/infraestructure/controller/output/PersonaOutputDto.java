@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 public class PersonaOutputDto {
-    Integer id;
+    int id;
     String user;
     String password;
     String name;

@@ -115,7 +115,8 @@ public class PersonaServiceImpl implements PersonaService {
      */
     public List<PersonaOutputDto> getPersonas() {
         List<Persona> personas = personaRepository.findAll();
-        return personas.stream().map(PersonaOutputDto::new).collect(Collectors.toList());
+        return personas.stream().map(PersonaOutputDto::new).collect(
+                Collectors.toList());
     }
 
     /**
@@ -125,7 +126,7 @@ public class PersonaServiceImpl implements PersonaService {
     public void deleteById(int id) throws NotFoundException {
 
         personaRepository.findById(id).orElseThrow(() ->
-                new NotFoundException("Usuario con id "+id+" no encontrado"));
+                new NotFoundException("Persona con id "+id+" no encontrada"));
 
         personaRepository.deleteById(id);
     }
