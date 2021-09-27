@@ -49,7 +49,7 @@ public class Estudiante {
     @Column(nullable = false)
     private String branch;
 
-    @OneToMany(mappedBy = "estudiante", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToMany(mappedBy = "estudiantes")
     private List<EstudianteAsignatura> asignaturas;
 
     public Estudiante(EstudianteInputDto studentInputDto) { setStudent(studentInputDto); }

@@ -12,7 +12,7 @@ import javax.validation.Valid;
 @RestController
 @AllArgsConstructor
 @RequestMapping("estudianteAsignatura")
-public class EstudianteAsignaturaAsignaturaCreateController {
+public class EstudianteAsignaturaCreateController {
 
     EstudianteAsignaturaService estudianteAsignaturaService;
 

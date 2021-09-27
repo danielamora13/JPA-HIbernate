@@ -8,6 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -30,9 +31,13 @@ public class EstudianteAsignatura {
             })
     private String id;
 
-    @ManyToOne
-    @JoinColumn(name ="idEstudiante")
-    private Estudiante estudiante;
+    @ManyToMany
+    @JoinTable(
+            name ="idEstudiante",
+            joinColumns = @JoinColumn(name = "idEstudiante"),
+            inverseJoinColumns = @JoinColumn(name = "idAsignatura")
+    )
+    private List<Estudiante> estudiantes;
 
     private String asignatura;
 

@@ -4,11 +4,12 @@ import com.example.JPA.Hibernate.estudianteAsignatura.domain.EstudianteAsignatur
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class EstudianteAsignaturaInputDto {
     public String id;
-    public String idEstudiante;
+    public List<String> idEstudiantes;
     public String asignatura;
     public String comments;
     public Date initialDate;

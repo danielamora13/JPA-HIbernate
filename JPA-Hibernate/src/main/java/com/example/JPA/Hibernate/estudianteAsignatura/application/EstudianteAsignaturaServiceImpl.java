@@ -31,7 +31,7 @@ public class EstudianteAsignaturaServiceImpl implements EstudianteAsignaturaServ
     }
 
     @Override
-    public EstudianteAsignaturaOutputDto anhadirAsignatura(EstudianteAsignaturaInputDto estudianteAsignaturaInputDto) throws UnprocesableException {
+    public EstudianteAsignaturaOutputDto anhadirAsignatura(EstudianteAsignaturaInputDto estudianteAsignaturaInputDto) throws UnprocesableException, NotFoundException {
         if (estudianteAsignaturaInputDto == null) {
             return null;
         }
@@ -41,12 +41,12 @@ public class EstudianteAsignaturaServiceImpl implements EstudianteAsignaturaServ
 
         EstudianteAsignatura estudianteAsignatura = estudianteAsignaturaInputDto.estudianteAsignaturaInputDto();
 
-        if (estudianteAsignaturaInputDto.idEstudiante != null) {
-            Estudiante estudiante = estudianteRepository.findById(estudianteAsignaturaInputDto.idEstudiante).orElseThrow(() ->
-                    new NotFoundException("Estudiante con id "+ estudianteAsignaturaInputDto.idEstudiante+" no encontrado"));
+        if (!estudianteAsignaturaInputDto.idEstudiantes.isEmpty()) {
+            List<String> estudiantes = estudianteAsignaturaInputDto.getIdEstudiantes();
+            List<Estudiante> estudiantesCompletos = estudiantes.stream().map(l -> estudianteRepository.findById(l).orElseThrow(() ->
+                            new NotFoundException("Estudiante con id "+ l +" no encontrado"))).collect(Collectors.toList());
 
-            //estudiante.getAsignaturas().add(estudianteAsignatura);
-            estudianteAsignatura.setEstudiante(estudiante);
+            estudianteAsignatura.setEstudiantes(estudiantesCompletos);
         }
 
         estudianteAsignaturaRepository.save(estudianteAsignatura);
@@ -64,16 +64,15 @@ public class EstudianteAsignaturaServiceImpl implements EstudianteAsignaturaServ
                 new NotFoundException("Asignatura con id "+id+" no encontrada"));
         estudianteAsignatura.setEstudianteAsignatura(estudianteAsignaturaInputDto);
 
-        if (estudianteAsignaturaInputDto.idEstudiante != null) {
-            Estudiante estudianteAnterior = estudianteRepository.findById(estudianteAsignatura.getEstudiante().getIdEstudiante()).orElseThrow(() ->
-                    new NotFoundException("Estudiante con id "+ estudianteAsignaturaInputDto.idEstudiante+" no encontrado"));
+        if (!estudianteAsignaturaInputDto.idEstudiantes.isEmpty()) {
+            List<String> estudiantes = estudianteAsignaturaInputDto.getIdEstudiantes();
 
-            Estudiante estudiante = estudianteRepository.findById(estudianteAsignaturaInputDto.idEstudiante).orElseThrow(() ->
-                    new NotFoundException("Estudiante con id "+ estudianteAsignaturaInputDto.idEstudiante+" no encontrado"));
+            List<Estudiante> estudiantesAnteriores = estudianteAsignatura.getEstudiantes();
 
-            estudianteAnterior.getAsignaturas().remove(estudianteAsignatura);
-            estudiante.getAsignaturas().add(estudianteAsignatura);
-            estudianteAsignatura.setEstudiante(estudiante);
+            List<Estudiante> estudiantesCompletos = estudiantes.stream().map(l -> estudianteRepository.findById(l).orElseThrow(() ->
+                    new NotFoundException("Estudiante con id "+ l +" no encontrado"))).collect(Collectors.toList());
+
+            estudianteAsignatura.setEstudiantes(estudiantesCompletos);
         }
 
         estudianteAsignaturaRepository.save(estudianteAsignatura);
