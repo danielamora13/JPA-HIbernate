@@ -48,7 +48,7 @@ public class StudentAsignaturaServiceImpl implements StudentAsignaturaService{
             Student student = studentRepository.findById(studentAsignaturaInputDto.idStudent).orElseThrow(() ->
                     new NotFoundException("Estudiante con id "+studentAsignaturaInputDto.idStudent+" no encontrado"));
 
-            student.getAsignaturas().add(studentAsignatura);
+            //student.getAsignaturas().add(studentAsignatura);
             studentAsignatura.setStudent(student);
         }
 

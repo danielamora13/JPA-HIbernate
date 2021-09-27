@@ -16,7 +16,7 @@ public class FullProfesorOutputDto extends ProfesorOutputDto{
 
 
     public FullProfesorOutputDto(Profesor profesor) {
-        super();
+        super(profesor);
         this.setStudents(profesor.getStudents().stream().map(l -> new SimpleStudentOutputDto(l)).collect(Collectors.toList()));
     }
 

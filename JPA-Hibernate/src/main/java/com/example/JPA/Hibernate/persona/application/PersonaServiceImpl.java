@@ -5,6 +5,8 @@ import com.example.JPA.Hibernate.exceptions.UnprocesableException;;
 import com.example.JPA.Hibernate.persona.domain.Persona;
 import com.example.JPA.Hibernate.persona.infraestructure.controller.input.PersonaInputDto;
 import com.example.JPA.Hibernate.persona.infraestructure.controller.output.PersonaOutputDto;
+import com.example.JPA.Hibernate.persona.infraestructure.controller.output.PersonaProfesorOutputDto;
+import com.example.JPA.Hibernate.persona.infraestructure.controller.output.PersonaStudentOutputDto;
 import com.example.JPA.Hibernate.persona.infraestructure.repository.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -93,8 +95,17 @@ public class PersonaServiceImpl implements PersonaService {
      * @throws Exception si no hay ningun usuario con ese id
      */
     public PersonaOutputDto getPersonaById(String id) throws NotFoundException {
-        return new PersonaOutputDto(personaRepository.findById(id).orElseThrow(() ->
-                new NotFoundException("Usuario con id "+id+" no encontrado")));
+
+        Persona persona = personaRepository.findById(id).orElseThrow(() ->
+                new NotFoundException("Usuario con id "+id+" no encontrado"));
+
+        if (persona.getProfesor() != null) {
+            return new PersonaProfesorOutputDto(persona);
+        } else if (persona.getStudent() != null) {
+            return new PersonaStudentOutputDto(persona);
+        } else {
+            return new PersonaOutputDto(persona);
+        }
     }
 
     /**
