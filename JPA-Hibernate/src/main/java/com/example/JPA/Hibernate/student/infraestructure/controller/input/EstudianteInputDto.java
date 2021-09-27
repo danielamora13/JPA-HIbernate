@@ -7,7 +7,6 @@ import lombok.Data;
 @Data
 public class EstudianteInputDto {
 
-    public String idEstudiante;
     public String idPersona;
     public int numHoursWeek;
     public String comments;
@@ -16,7 +15,6 @@ public class EstudianteInputDto {
 
     public Estudiante studentInputDto() {
         Estudiante estudiante = new Estudiante();
-        estudiante.setIdEstudiante(this.idEstudiante);
         //s.setPersona(this.idPersona);
         estudiante.setNumHoursWeek(this.numHoursWeek);
         estudiante.setComments(this.comments);

@@ -7,7 +7,6 @@ import java.util.Date;
 
 @Data
 public class PersonaInputDto {
-    public String id;
     public String user;
     public String password;
     public String name;
@@ -22,7 +21,6 @@ public class PersonaInputDto {
 
     public Persona personaInputDto(){
         Persona persona= new Persona();
-        persona.setId(this.getId());
         persona.setUser(this.getUser());
         persona.setPassword(this.getPassword());
         persona.setName(this.getName());

@@ -8,7 +8,6 @@ import java.util.List;
 
 @Data
 public class EstudianteAsignaturaInputDto {
-    public String id;
     public List<String> idEstudiantes;
     public String asignatura;
     public String comments;
@@ -17,7 +16,6 @@ public class EstudianteAsignaturaInputDto {
 
     public EstudianteAsignatura estudianteAsignaturaInputDto() {
         EstudianteAsignatura estudianteAsignatura = new EstudianteAsignatura();
-        estudianteAsignatura.setId(this.id);
         estudianteAsignatura.setAsignatura(this.asignatura);
         estudianteAsignatura.setComments(this.comments);
         estudianteAsignatura.setInitialDate(this.initialDate);

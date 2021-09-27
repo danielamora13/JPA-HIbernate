@@ -5,7 +5,6 @@ import lombok.Data;
 
 @Data
 public class ProfesorInputDto {
-    public String idProfesor;
     public String idPersona;
     public String comments;
     //public List<String> idStudents;
@@ -13,7 +12,6 @@ public class ProfesorInputDto {
 
     public Profesor profesorInputDto() {
         Profesor profesor = new Profesor();
-        profesor.setIdProfesor(this.idProfesor);
         profesor.setComments(this.comments);
         profesor.setBranch(this.branch);
 
