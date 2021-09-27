@@ -1,12 +1,8 @@
 package com.example.JPA.Hibernate.profesor.infraestructure.controller.output;
 
 import com.example.JPA.Hibernate.profesor.domain.Profesor;
-import com.example.JPA.Hibernate.student.domain.Student;
-import com.example.JPA.Hibernate.student.infraestructure.controller.output.StudentOutputDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @NoArgsConstructor

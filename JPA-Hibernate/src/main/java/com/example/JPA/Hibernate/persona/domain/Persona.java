@@ -1,8 +1,9 @@
 package com.example.JPA.Hibernate.persona.domain;
 
+import com.example.JPA.Hibernate.StringPrefixedSequenceIdGenerator;
 import com.example.JPA.Hibernate.persona.infraestructure.controller.input.PersonaInputDto;
 import com.example.JPA.Hibernate.profesor.domain.Profesor;
-import com.example.JPA.Hibernate.student.domain.Student;
+import com.example.JPA.Hibernate.student.domain.Estudiante;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -22,6 +23,15 @@ import org.hibernate.annotations.Parameter;
 public class Persona {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "persona_seq")
+    @GenericGenerator(
+            name = "persona_seq",
+            strategy = "com.example.JPA.Hibernate.StringPrefixedSequenceIdGenerator",
+            parameters = {
+                    @Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "1"),
+                    @Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "Persona_"),
+                    @Parameter(name = StringPrefixedSequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%08d")
+            })
     private String id;
     @Column(nullable = false)
     @Size(min = 6, max = 10)
@@ -51,7 +61,7 @@ public class Persona {
               orphanRemoval = true,
               fetch = FetchType.LAZY
     )
-    private Student student;
+    private Estudiante estudiante;
 
     @OneToOne(mappedBy = "persona",
             cascade = CascadeType.ALL,

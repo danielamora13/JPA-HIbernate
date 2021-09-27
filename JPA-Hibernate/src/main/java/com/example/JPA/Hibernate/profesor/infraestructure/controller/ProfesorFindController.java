@@ -3,7 +3,6 @@ package com.example.JPA.Hibernate.profesor.infraestructure.controller;
 import com.example.JPA.Hibernate.exceptions.NotFoundException;
 import com.example.JPA.Hibernate.profesor.application.ProfesorService;
 import com.example.JPA.Hibernate.profesor.infraestructure.controller.output.ProfesorOutputDto;
-import com.example.JPA.Hibernate.student.infraestructure.controller.output.SimpleStudentOutputDto;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

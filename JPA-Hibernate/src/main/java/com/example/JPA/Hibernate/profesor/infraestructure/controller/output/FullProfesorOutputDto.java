@@ -1,8 +1,7 @@
 package com.example.JPA.Hibernate.profesor.infraestructure.controller.output;
 
-import com.example.JPA.Hibernate.persona.infraestructure.controller.output.PersonaOutputDto;
 import com.example.JPA.Hibernate.profesor.domain.Profesor;
-import com.example.JPA.Hibernate.student.infraestructure.controller.output.SimpleStudentOutputDto;
+import com.example.JPA.Hibernate.student.infraestructure.controller.output.SimpleEstudianteOutputDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,12 +11,12 @@ import java.util.stream.Collectors;
 @Data
 @NoArgsConstructor
 public class FullProfesorOutputDto extends ProfesorOutputDto{
-    List<SimpleStudentOutputDto> Students;
+    List<SimpleEstudianteOutputDto> Students;
 
 
     public FullProfesorOutputDto(Profesor profesor) {
         super(profesor);
-        this.setStudents(profesor.getStudents().stream().map(l -> new SimpleStudentOutputDto(l)).collect(Collectors.toList()));
+        this.setStudents(profesor.getEstudiantes().stream().map(l -> new SimpleEstudianteOutputDto(l)).collect(Collectors.toList()));
     }
 
 }

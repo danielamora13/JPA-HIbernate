@@ -101,7 +101,7 @@ public class PersonaServiceImpl implements PersonaService {
 
         if (persona.getProfesor() != null) {
             return new PersonaProfesorOutputDto(persona);
-        } else if (persona.getStudent() != null) {
+        } else if (persona.getEstudiante() != null) {
             return new PersonaStudentOutputDto(persona);
         } else {
             return new PersonaOutputDto(persona);
