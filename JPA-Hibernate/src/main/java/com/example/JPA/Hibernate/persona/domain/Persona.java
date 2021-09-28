@@ -9,6 +9,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 import org.hibernate.annotations.Parameter;
@@ -17,8 +18,6 @@ import org.hibernate.annotations.Parameter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
-@ToString
 @Entity
 public class Persona {
 
@@ -33,27 +32,38 @@ public class Persona {
                     @Parameter(name = StringPrefixedSequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%08d")
             })
     private String id;
-    @Column(nullable = false)
+
+    @NotNull(message = "user no puede ser nulo")
     @Size(min = 6, max = 10)
     private String user;
-    @Column(nullable = false)
+
+    @NotNull(message = "contraseña no puede ser nula")
     private String password;
-    @Column(nullable = false)
+
+    @NotNull(message = "nombre no puede ser nulo")
     private String name;
+
     private String surname;
-    @Column(nullable = false)
+
+    @NotNull(message = "company_email no puede ser nulo")
     @Email
     private String company_email;
-    @Column(nullable = false)
+
+    @NotNull(message = "personal_email no puede ser nulo")
     @Email
     private String personal_email;
-    @Column(nullable = false)
+
+    @NotNull(message = "city no puede ser nula")
     private String city;
-    @Column(nullable = false)
+
+    @NotNull(message = "active no puede ser nulo")
     private Boolean active;
-    @Column(nullable = false)
+
+    @NotNull(message = "created_date no puede ser nulo")
     private Date created_date = new Date();
+
     private String imagen_url;
+
     private  Date termination_date;
 
     @OneToOne(mappedBy = "persona",

@@ -4,10 +4,7 @@ import com.example.JPA.Hibernate.exceptions.NotFoundException;
 import com.example.JPA.Hibernate.persona.application.PersonaService;
 import com.example.JPA.Hibernate.persona.infraestructure.controller.output.PersonaOutputDto;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,8 +16,10 @@ public class PersonaFindController {
     PersonaService personaService;
 
     @GetMapping("{id}")
-    public PersonaOutputDto getPersonaById(@PathVariable String id) throws NotFoundException {
-        return personaService.getPersonaById(id);
+    public PersonaOutputDto getPersonaById(@PathVariable String id,
+                                           @RequestParam(name = "type", defaultValue = "simple") String type)
+            throws NotFoundException {
+        return personaService.getPersonaById(id, type);
     }
 
     @GetMapping("name/{name}")

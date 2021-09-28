@@ -52,9 +52,9 @@ public class Estudiante {
     @ManyToMany(mappedBy = "estudiantes")
     private List<EstudianteAsignatura> asignaturas;
 
-    public Estudiante(EstudianteInputDto studentInputDto) { setStudent(studentInputDto); }
+    public Estudiante(EstudianteInputDto studentInputDto) { setEstudiante(studentInputDto); }
 
-    public void setStudent(EstudianteInputDto estudianteInputDto) {
+    public void setEstudiante(EstudianteInputDto estudianteInputDto) {
 
         if (estudianteInputDto == null) {
             return;

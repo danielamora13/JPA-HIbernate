@@ -12,15 +12,18 @@ public interface EstudianteAsignaturaService {
 
     EstudianteAsignaturaInputDto getAsignatura();
 
-    EstudianteAsignaturaOutputDto anhadirAsignatura(EstudianteAsignaturaInputDto estudianteAsignaturaInputDto) throws UnprocesableException;
+    EstudianteAsignaturaOutputDto anhadirAsignatura(EstudianteAsignaturaInputDto estudianteAsignaturaInputDto)
+            throws UnprocesableException;
 
-    EstudianteAsignaturaOutputDto updateAsignaturaById(EstudianteAsignaturaInputDto estudianteAsignaturaInputDto, String id) throws NotFoundException, UnprocesableException;
+    EstudianteAsignaturaOutputDto updateAsignaturaById(EstudianteAsignaturaInputDto estudianteAsignaturaInputDto,
+                                                       String id)
+            throws NotFoundException, UnprocesableException;
 
-    EstudianteAsignaturaOutputDto getAsignaturaById(String id) throws NotFoundException;
-
-    //List<StudentAsignaturaOutputDto> getAsignaturatByName(String name);
+    EstudianteAsignaturaOutputDto getAsignaturaById(String id)
+            throws NotFoundException;
 
     List<EstudianteAsignaturaOutputDto> getAsignaturas();
 
-    void deleteById(String id) throws NotFoundException;
+    void deleteById(String id)
+            throws NotFoundException;
 }

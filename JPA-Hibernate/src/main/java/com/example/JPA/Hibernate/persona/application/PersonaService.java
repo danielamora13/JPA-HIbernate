@@ -15,7 +15,7 @@ public interface PersonaService {
 
     PersonaOutputDto updatePersonaById(PersonaInputDto personaInputDto, String id) throws NotFoundException, UnprocesableException;
 
-    PersonaOutputDto getPersonaById(String id) throws NotFoundException;
+    PersonaOutputDto getPersonaById(String id, String type) throws NotFoundException;
 
     List<PersonaOutputDto> getPersonaByName(String name);
 

@@ -12,15 +12,23 @@ public interface EstudianteService {
 
     EstudianteInputDto getEstudiante();
 
-    SimpleEstudianteOutputDto anhadirEstudiante(EstudianteInputDto studentInputDto) throws UnprocesableException;
+    SimpleEstudianteOutputDto anhadirEstudiante(EstudianteInputDto studentInputDto)
+            throws UnprocesableException;
 
-    SimpleEstudianteOutputDto updateEstudianteById(EstudianteInputDto studentInputDto, String id) throws NotFoundException, UnprocesableException;
+    SimpleEstudianteOutputDto updateEstudianteById(EstudianteInputDto studentInputDto, String id)
+            throws NotFoundException, UnprocesableException;
 
-    EstudianteOutputDto getEstudianteById(String id, String outputType) throws NotFoundException;
+    SimpleEstudianteOutputDto asignarAsignaturasAEstudiante(String id, List<String> asignaturas)
+            throws NotFoundException, UnprocesableException;
 
-    //List<SimpleStudentOutputDto> getEstudianteByName(String name);
+    SimpleEstudianteOutputDto desasignarAsignaturasAEstudiante(String id, List<String> asignaturas)
+            throws NotFoundException, UnprocesableException;
+
+    EstudianteOutputDto getEstudianteById(String id, String outputType)
+            throws NotFoundException;
 
     List<SimpleEstudianteOutputDto> getEstudiantes();
 
-    void deleteById(String id) throws NotFoundException;
+    void deleteById(String id)
+            throws NotFoundException;
 }

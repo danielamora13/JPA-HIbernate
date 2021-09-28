@@ -17,8 +17,6 @@ public interface ProfesorService {
 
     ProfesorOutputDto getProfesorById(String id) throws NotFoundException;
 
-    //List<ProfesorOutputDto> getProfesorByName(String name);
-
     List<ProfesorOutputDto> getProfesors();
 
     void deleteById(String id) throws NotFoundException;

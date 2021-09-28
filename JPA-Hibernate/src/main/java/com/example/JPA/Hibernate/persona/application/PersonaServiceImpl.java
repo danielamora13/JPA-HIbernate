@@ -94,18 +94,27 @@ public class PersonaServiceImpl implements PersonaService {
      * @return el usuario buscado
      * @throws Exception si no hay ningun usuario con ese id
      */
-    public PersonaOutputDto getPersonaById(String id) throws NotFoundException {
+    public PersonaOutputDto getPersonaById(String id, String type) throws NotFoundException, UnprocesableException {
 
         Persona persona = personaRepository.findById(id).orElseThrow(() ->
                 new NotFoundException("Usuario con id "+id+" no encontrado"));
 
-        if (persona.getProfesor() != null) {
-            return new PersonaProfesorOutputDto(persona);
-        } else if (persona.getEstudiante() != null) {
-            return new PersonaStudentOutputDto(persona);
-        } else {
-            return new PersonaOutputDto(persona);
+        switch (type) {
+            case "simple":
+                return new PersonaOutputDto(persona);
+            case "full":
+                if (persona.getProfesor() != null) {
+                    return new PersonaProfesorOutputDto(persona);
+                } else if (persona.getEstudiante() != null) {
+                    return new PersonaStudentOutputDto(persona);
+                } else {
+                    return new PersonaOutputDto(persona);
+                }
+            default:
+                throw new UnprocesableException("Se debe indicar 'simple' si se quiere solo los datos" +
+                        " de la persona o 'full' si también se quieren los del profesor o alumno.");
         }
+
     }
 
     /**
@@ -132,10 +141,17 @@ public class PersonaServiceImpl implements PersonaService {
      * Metodo que borra a un usuario
      * @param id id del usuario a borrar
      */
-    public void deleteById(String id) throws NotFoundException {
+    public void deleteById(String id) throws NotFoundException, UnprocesableException {
 
-        personaRepository.findById(id).orElseThrow(() ->
+        Persona persona = personaRepository.findById(id).orElseThrow(() ->
                 new NotFoundException("Persona con id "+id+" no encontrada"));
+
+        if (persona.getEstudiante() != null) {
+            throw new UnprocesableException("No se puede borrar la persona porque tiene un estudiante asignado.");
+        }
+        if (persona.getProfesor() != null) {
+            throw new UnprocesableException("No se puede borrar la persona porque tiene un profesor asignado.");
+        }
 
         personaRepository.deleteById(id);
     }

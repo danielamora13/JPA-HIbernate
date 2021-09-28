@@ -31,7 +31,8 @@ public class EstudianteAsignaturaServiceImpl implements EstudianteAsignaturaServ
     }
 
     @Override
-    public EstudianteAsignaturaOutputDto anhadirAsignatura(EstudianteAsignaturaInputDto estudianteAsignaturaInputDto) throws UnprocesableException, NotFoundException {
+    public EstudianteAsignaturaOutputDto anhadirAsignatura(EstudianteAsignaturaInputDto estudianteAsignaturaInputDto)
+            throws UnprocesableException, NotFoundException {
         if (estudianteAsignaturaInputDto == null) {
             return null;
         }
@@ -43,8 +44,10 @@ public class EstudianteAsignaturaServiceImpl implements EstudianteAsignaturaServ
 
         if (!estudianteAsignaturaInputDto.idEstudiantes.isEmpty()) {
             List<String> estudiantes = estudianteAsignaturaInputDto.getIdEstudiantes();
-            List<Estudiante> estudiantesCompletos = estudiantes.stream().map(l -> estudianteRepository.findById(l).orElseThrow(() ->
-                            new NotFoundException("Estudiante con id "+ l +" no encontrado"))).collect(Collectors.toList());
+            List<Estudiante> estudiantesCompletos = estudiantes.stream().map(l ->
+                    estudianteRepository.findById(l).orElseThrow(() ->
+                            new NotFoundException("Estudiante con id "+ l +" no encontrado")))
+                    .collect(Collectors.toList());
 
             estudianteAsignatura.setEstudiantes(estudiantesCompletos);
         }
@@ -55,24 +58,26 @@ public class EstudianteAsignaturaServiceImpl implements EstudianteAsignaturaServ
     }
 
     @Override
-    public EstudianteAsignaturaOutputDto updateAsignaturaById(EstudianteAsignaturaInputDto estudianteAsignaturaInputDto, String id) throws NotFoundException, UnprocesableException {
+    public EstudianteAsignaturaOutputDto updateAsignaturaById(EstudianteAsignaturaInputDto estudianteAsignaturaInputDto,
+                                                              String id)
+            throws NotFoundException, UnprocesableException {
         if (estudianteAsignaturaInputDto == null) {
             return null;
         }
 
         EstudianteAsignatura estudianteAsignatura = estudianteAsignaturaRepository.findById(id).orElseThrow(() ->
                 new NotFoundException("Asignatura con id "+id+" no encontrada"));
+
         estudianteAsignatura.setEstudianteAsignatura(estudianteAsignaturaInputDto);
 
         if (!estudianteAsignaturaInputDto.idEstudiantes.isEmpty()) {
             List<String> estudiantes = estudianteAsignaturaInputDto.getIdEstudiantes();
 
-            List<Estudiante> estudiantesAnteriores = estudianteAsignatura.getEstudiantes();
-
-            List<Estudiante> estudiantesCompletos = estudiantes.stream().map(l -> estudianteRepository.findById(l).orElseThrow(() ->
+            List<Estudiante> estudiantesCompletos = estudiantes.stream().map(l -> estudianteRepository
+                    .findById(l).orElseThrow(() ->
                     new NotFoundException("Estudiante con id "+ l +" no encontrado"))).collect(Collectors.toList());
 
-            estudianteAsignatura.setEstudiantes(estudiantesCompletos);
+            estudianteAsignatura.getEstudiantes().addAll(estudiantesCompletos);
         }
 
         estudianteAsignaturaRepository.save(estudianteAsignatura);
@@ -93,10 +98,13 @@ public class EstudianteAsignaturaServiceImpl implements EstudianteAsignaturaServ
     }
 
     @Override
-    public void deleteById(String id) throws NotFoundException {
-        estudianteAsignaturaRepository.findById(id).orElseThrow(() ->
+    public void deleteById(String id) throws NotFoundException, UnprocesableException {
+        EstudianteAsignatura estudianteAsignatura = estudianteAsignaturaRepository.findById(id).orElseThrow(() ->
                 new NotFoundException("Asignatura con id "+id+" no encontrada"));
 
+        if (estudianteAsignatura.getEstudiantes() != null) {
+            throw new UnprocesableException("No se puede borrar la asignatura porque tiene estudiantes asignados.");
+        }
         estudianteAsignaturaRepository.deleteById(id);
     }
 }

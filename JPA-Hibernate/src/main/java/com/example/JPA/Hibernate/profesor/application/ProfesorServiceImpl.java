@@ -44,8 +44,15 @@ public class ProfesorServiceImpl implements ProfesorService{
         Persona persona = personaRepository.findById(profesorInputDto.idPersona).orElseThrow(() ->
                 new NotFoundException("Persona con id "+profesorInputDto.idPersona+" no encontrada"));
 
+        if (persona.getEstudiante() != null) {
+            throw new UnprocesableException("La persona con id " + persona.getId()+" es estudiante");
+        }
+
+        if (persona.getProfesor() != null) {
+            throw new UnprocesableException("La persona con id " + persona.getId()+" es profesor");
+        }
+
         profesor.setPersona(persona);
-        //persona.setProfesor(profesor);
 
         profesorRepository.save(profesor);
 

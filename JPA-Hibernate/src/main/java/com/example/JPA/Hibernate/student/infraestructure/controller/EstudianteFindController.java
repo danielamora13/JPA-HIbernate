@@ -23,11 +23,6 @@ public class EstudianteFindController {
         return estudianteService.getEstudianteById(id, outputType);
     }
 
-//    @GetMapping("/student/name/{name}")
-//    public List<PersonaOutputDto> getPersonaByName(@PathVariable String name) {
-//        return studentService.getStudentByName(name);
-//    }
-
     @GetMapping
     public List<SimpleEstudianteOutputDto> getStudents() {
         return estudianteService.getEstudiantes();

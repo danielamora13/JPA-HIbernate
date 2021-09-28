@@ -3,6 +3,8 @@ package com.example.JPA.Hibernate.estudianteAsignatura.infraestructrure.controll
 import com.example.JPA.Hibernate.estudianteAsignatura.application.EstudianteAsignaturaService;
 import com.example.JPA.Hibernate.estudianteAsignatura.infraestructrure.controller.input.EstudianteAsignaturaInputDto;
 import com.example.JPA.Hibernate.estudianteAsignatura.infraestructrure.controller.output.EstudianteAsignaturaOutputDto;
+import com.example.JPA.Hibernate.exceptions.NotFoundException;
+import com.example.JPA.Hibernate.exceptions.UnprocesableException;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +18,9 @@ public class EstudianteAsignaturaUpdateController {
     EstudianteAsignaturaService estudianteAsignaturaService;
 
     @PutMapping("{id}")
-    public EstudianteAsignaturaOutputDto updateAsignaturaById(@Valid @RequestBody EstudianteAsignaturaInputDto estudianteAsignaturaInputDto, @PathVariable String id) throws Exception{
+    public EstudianteAsignaturaOutputDto updateAsignaturaById(@Valid @RequestBody EstudianteAsignaturaInputDto estudianteAsignaturaInputDto,
+                                                              @PathVariable String id)
+            throws NotFoundException, UnprocesableException {
         return estudianteAsignaturaService.updateAsignaturaById(estudianteAsignaturaInputDto, id);
     }
 }
