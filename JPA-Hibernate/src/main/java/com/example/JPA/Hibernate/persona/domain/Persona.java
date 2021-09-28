@@ -81,6 +81,30 @@ public class Persona {
         setPersona(personaInputDto);
     }
 
+    public Persona(String user,
+                   String password,
+                   String name,
+                   String surname,
+                   String company_email,
+                   String personal_email,
+                   String city,
+                   Boolean active,
+                   Date created_date,
+                   String imagen_url,
+                   Date termination_date) {
+        this.user = user;
+        this.password = password;
+        this.name = name;
+        this.surname = surname;
+        this.company_email = company_email;
+        this.personal_email = personal_email;
+        this.city = city;
+        this.active = active;
+        this.created_date = created_date;
+        this.imagen_url = imagen_url;
+        this.termination_date = termination_date;
+    }
+
     public void setPersona(PersonaInputDto personaInputDto) {
 
         if (personaInputDto == null) {
