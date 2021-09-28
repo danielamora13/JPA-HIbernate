@@ -32,7 +32,7 @@ public class PersonaServiceImpl implements PersonaService {
      * Metodo para anhadir a un usurario a la tabla persona.
      * @param personaInputDto usuario a anhadir.
      * @return el usuarioi que se ha anhadido.
-     * @throws Exception si los email no son validos o no lo es el nombre de usuario.
+     * @throws UnprocesableException si los email no son validos o no lo es el nombre de usuario.
      */
     public PersonaOutputDto anhadirPersona(PersonaInputDto personaInputDto) throws UnprocesableException {
         if (personaInputDto == null) {

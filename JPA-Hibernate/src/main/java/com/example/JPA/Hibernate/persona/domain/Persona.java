@@ -33,33 +33,30 @@ public class Persona {
             })
     private String id;
 
-    @NotNull(message = "user no puede ser nulo")
-    @Size(min = 6, max = 10)
+    @Column(nullable = false)
     private String user;
 
-    @NotNull(message = "contraseña no puede ser nula")
+    @Column(nullable = false)
     private String password;
 
-    @NotNull(message = "nombre no puede ser nulo")
+    @Column(nullable = false)
     private String name;
 
     private String surname;
 
-    @NotNull(message = "company_email no puede ser nulo")
-    @Email
+    @Column(nullable = false)
     private String company_email;
 
-    @NotNull(message = "personal_email no puede ser nulo")
-    @Email
+    @Column(nullable = false)
     private String personal_email;
 
-    @NotNull(message = "city no puede ser nula")
+    @Column(nullable = false)
     private String city;
 
-    @NotNull(message = "active no puede ser nulo")
+    @Column(nullable = false)
     private Boolean active;
 
-    @NotNull(message = "created_date no puede ser nulo")
+    @Column(nullable = false)
     private Date created_date = new Date();
 
     private String imagen_url;

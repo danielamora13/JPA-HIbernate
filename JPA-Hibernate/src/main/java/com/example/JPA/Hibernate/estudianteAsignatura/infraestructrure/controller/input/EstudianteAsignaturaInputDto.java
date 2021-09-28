@@ -3,6 +3,7 @@ package com.example.JPA.Hibernate.estudianteAsignatura.infraestructrure.controll
 import com.example.JPA.Hibernate.estudianteAsignatura.domain.EstudianteAsignatura;
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,8 @@ public class EstudianteAsignaturaInputDto {
     public List<String> idEstudiantes;
     public String asignatura;
     public String comments;
+
+    @NotNull(message = "La fecha inicial no puede estar vacía")
     public Date initialDate;
     public Date finishDate;
 
