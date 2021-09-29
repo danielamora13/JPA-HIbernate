@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+//@Service
 public interface PersonaRepository extends JpaRepository<Persona, String> {
     List<Persona> findByName(String name);
 
