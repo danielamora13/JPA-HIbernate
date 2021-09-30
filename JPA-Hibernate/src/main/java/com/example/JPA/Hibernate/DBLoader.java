@@ -27,33 +27,33 @@ public class DBLoader implements ApplicationRunner {
     public void run(ApplicationArguments applicationArguments) throws Exception {
 
         String[] citys = {
-                "op and running with %s",
-                "%s Basics",
-                "%s for Beginners",
-                "%s for Neckbeards",
-                "Under the hood: %s",
-                "Discovering %s",
-                "A short guide to %s",
-                "%s with Baeldung"
+                "Santander",
+                "Bilbao",
+                "San Sebastian",
+                "Barcelona",
+                "Madrid",
+                "Sevilla",
+                "Granada",
+                "Gijon"
         };
 
         String[] users = {
-                "Spring REST Data",
-                "Java 9",
-                "Scala",
-                "Groovy",
-                "Hibernate",
-                "Spring HATEOS",
-                "The HAL Browser",
-                "Spring webflux",
+                "Ana001",
+                "MariPili",
+                "Pilar005",
+                "Javi54",
+                "Ronal92",
+                "Torres9",
+                "Loser",
+                "Capicua",
         };
 
         String[] names = {
-                "John %s",
-                "Steve %s",
-                "Samantha %s",
-                "Gale %s",
-                "Tom %s"
+                "John",
+                "Steve",
+                "Samantha",
+                "Gale",
+                "Tom"
         };
 
         String[] passwords = {

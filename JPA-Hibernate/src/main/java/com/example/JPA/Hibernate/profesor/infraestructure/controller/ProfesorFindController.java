@@ -16,7 +16,7 @@ public class ProfesorFindController {
     ProfesorService profesorService;
 
     @GetMapping("{id}")
-    public ProfesorOutputDto getStudentById(@PathVariable String id)
+    public ProfesorOutputDto getProfesorById(@PathVariable String id)
             throws NotFoundException {
         return profesorService.getProfesorById(id);
     }
